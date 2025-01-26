@@ -7,7 +7,31 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <main>
+        <header>
+            <h1>To do List</h1>
+            <input type="text" placeholder="Enter a new task...">
+            <select>
+                <option value="">Enter a category...</option>
+            </select>
+            <ul>
+                <li>All</li>    
+                <li>Work</li>
+                <li>Personal</li>
+            </ul>
+        </header>
+        <section>
+            <div class="task-tile-container">
+                <div class="task-tile-category">Urgent</div>
+                <div class="task-tile-entered">Pay phone bill</div>
+                <div class="task-tile-checkboxes">
+                    <input type="checkbox" name="task-tile-checkbox" />
+                    <button class="task-tile-remove">X</button>
+                </div>
+            </div>
+        </section>
 
+    </main>
 <script src="script.js"></script>
 </body>
 </html>
