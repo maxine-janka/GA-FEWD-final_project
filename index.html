@@ -5,28 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+    
 </head>
 <body>
     <main>
-        <header>
-            <h1>To do List</h1>
-            <input type="text" placeholder="Enter a new task...">
+        <header class="task-management-container">
+            <h1 class="task-management-title">To do List</h1>
+            <input type="text" class="task-managment-enter-task" placeholder="Enter a new task...">
             <select>
                 <option value="">Enter a category...</option>
             </select>
-            <ul>
-                <li>All</li>    
-                <li>Work</li>
-                <li>Personal</li>
+            <button class="task-management-add-button">Add</button>
+            <ul class="task-management-category-buttons">
+                <li class="category-button">All</li>    
+                <li class="category-button">Work</li>
+                <li class="category-button">Personal</li>
             </ul>
         </header>
         <section>
             <div class="task-tile-container">
-                <div class="task-tile-category">Urgent</div>
-                <div class="task-tile-entered">Pay phone bill</div>
-                <div class="task-tile-checkboxes">
-                    <input type="checkbox" name="task-tile-checkbox" />
-                    <button class="task-tile-remove">X</button>
+                <div class="task-tile-text-container">
+                    <div class="task-tile-category">Urgent</div>
+                    <div class="task-tile-entered-task">Pay phone bill</div>
+                </div>
+                <div class="task-tile-checkbox-container">
+                    <div class="task-tile-checkbox-done"></div>
+                    <div class="task-tile-remove">x</div>
                 </div>
             </div>
         </section>
