@@ -1,30 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
-    
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
+        rel="stylesheet">
+
 </head>
+
 <body>
     <main>
-        <header class="task-management-container">
-            <h1 class="task-management-title">To do List</h1>
-            <input type="text" class="task-managment-enter-task" placeholder="Enter a new task...">
-            <select>
-                <option value="">Enter a category...</option>
-            </select>
-            <button class="task-management-add-button">Add</button>
-            <ul class="task-management-category-buttons">
-                <li class="category-button">All</li>    
-                <li class="category-button">Work</li>
-                <li class="category-button">Personal</li>
-            </ul>
+        <header>
+            <div class="task-management-container">
+
+                <h1 class="task-management-title">To do List</h1>
+                <form>
+                    <input type="text" class="form-enter-task" placeholder="Enter a new task...">
+                    <select class="form-enter-category">
+                        <option value="">Enter a category...</option>
+                    </select>
+                    <button type="submit" class="form-add-button">Add</button>
+                </form>
+                <ul class="task-management-category-buttons">
+                    <li class="category-button">All</li>
+                    <li class="category-button">Work</li>
+                    <li class="category-button">Personal</li>
+                </ul>
+            </div>
         </header>
+
         <section>
             <div class="task-tile-container">
                 <div class="task-tile-text-container">
@@ -32,13 +41,27 @@
                     <div class="task-tile-entered-task">Pay phone bill</div>
                 </div>
                 <div class="task-tile-checkbox-container">
-                    <div class="task-tile-checkbox-done"></div>
+                    <div class="task-tile-checkbox-done">
+                        <input type="checkbox">
+                    </div>
                     <div class="task-tile-remove">x</div>
                 </div>
             </div>
         </section>
 
+        <!--Pop up Modal-->
+        <aside class="modal-confirm-delete-task">
+            <div class="modal-delete-message">
+                <p>Are you sure you want to delete this task?</p>
+                <div class="modal-button-container">
+                    <div class="modal-confirm-delete">Yes</div>
+                    <div class="modal-cancel-delete">No</div>
+                </div>
+            </div>
+        </aside>
+
     </main>
-<script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
+
 </html>
