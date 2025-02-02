@@ -144,3 +144,8 @@ input[type="checkbox"] {
     transition: 0.3s ease-in-out;
     cursor: pointer;
 }
+
+
+aside {
+    display: none;
+}
