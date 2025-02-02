@@ -1,5 +1,6 @@
 * {
     margin: 0;   
+    /* border: 1px solid black; */
 }
 body {
     font-family: "JetBrains Mono", serif;
@@ -91,7 +92,7 @@ div.task-tile-container {
     align-items: center;
     max-width: 914px;
     height: 88px;
-    margin: 56px auto;
+    margin: 24px auto;
     padding: 0 16px;
     border: 2px solid #000;
     border-radius: 8px;
