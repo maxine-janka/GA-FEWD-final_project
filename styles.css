@@ -90,7 +90,7 @@ div.task-tile-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 914px;
+    max-width: 696px;
     height: 88px;
     margin: 24px auto;
     padding: 0 16px;
@@ -99,13 +99,13 @@ div.task-tile-container {
     box-shadow: 4px 4px;
 }
 div.task-tile-text-container {
-    width: 300px;
+    width: 100%;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
 }
+
 div.task-tile-entered-task {
    font-weight: 800;
+   margin-left: 32px;
 }
 
 div.task-tile-checkbox-container {

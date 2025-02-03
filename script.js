@@ -5,10 +5,17 @@ const toDoListItems = document.querySelector('.task-tile-wrapper')
 
 //EVENT LISTENERS
 taskAddButton.addEventListener('click', addToDoItem);
+toDoListItems.addEventListener('click', deleteToDoItem);
 
 //FUNCTIONS
+
+//Add item task
 function addToDoItem(event){
     event.preventDefault();
+
+    if (taskInput.value.trim() === "") {
+        return;
+    }
 
     const addItemDiv = document.createElement('div');
     addItemDiv.classList.add('task-tile-container');
@@ -26,12 +33,10 @@ function addToDoItem(event){
     
     //Add task text
     const addItem = document.createElement('div');
-    addItem.innerText = 'Pay phone bill';
+    addItem.innerText = taskInput.value;
     addItem.classList.add('task-tile-entered-task')
     taskAndCategoryContainer.appendChild(addItem);
 
-    
-    
     //Add container for checkbox and delete button
     const doneAndDeleteContainer = document.createElement('div')
     doneAndDeleteContainer.classList.add('task-tile-checkbox-container');
@@ -50,8 +55,18 @@ function addToDoItem(event){
     deleteItemButton.innerText =  'x';
     deleteItemButton.classList.add('task-tile-remove');
     doneAndDeleteContainer.appendChild(deleteItemButton);
+    deleteItemButton.addEventListener('click', deleteToDoItem);
     
     toDoListItems.appendChild(addItemDiv);
 
-    
+    taskInput.value="";
+};
+
+//delete item function
+function deleteToDoItem (event) {
+    const deleteButton = event.target;
+    if (deleteButton.classList.contains('task-tile-remove')) {
+        const taskItem = deleteButton.closest('.task-tile-container');
+        taskItem.remove();
+    }
 };
