@@ -145,8 +145,51 @@ input[type="checkbox"] {
     transition: 0.3s ease-in-out;
     cursor: pointer;
 }
-
-
-aside {
+.modal-confirm-delete-task {
     display: none;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.modal-delete-message {
+    background-color: #fbfbfb;
+    border: 3px solid #000;
+    border-radius: 8px;
+    max-width: 700px;
+    text-align: center;
+    padding: 40px;
+    font-size: 24px;
+}
+.modal-button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 24px;
+}
+.modal-button {
+    border: 2px solid #000;
+    min-width: 50px;
+    padding: 16px;
+    border-radius: 16px;
+    box-shadow: 4px 4px;
+    text-transform: uppercase;
+    margin: 8px;
+}
+.modal-button.yes:hover {
+    cursor: pointer;
+    background-color: rgb(62, 150, 62);
+}
+.modal-button.no:hover {
+    cursor: pointer;
+    background-color: rgb(173, 47, 47);
+}
+.modal-button.yes {
+    background-color: rgb(90, 201, 90);
+}
+.modal-button.no {
+    background-color: rgb(219, 63, 63);
 }
