@@ -205,8 +205,8 @@ const weekday = ["Sunday", "Monday","Tuesday","Wednesday","Thursday","Friday","S
 getDate = new Date();
 let day = weekday[getDate.getDay()];
 
-let date = String(getDate.getDate());
-let month = String(getDate.getMonth());
+let date = String(getDate.getDate()).padStart(2, '0');
+let month = String(getDate.getMonth() + 1).padStart(2, '0');
 let year = String(getDate.getFullYear());
 
 let formattedDate = `${day} | ${date}.${month}.${year}`;
