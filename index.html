@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>✏️ To do List</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,24 +19,27 @@
             <div class="task-management-container">
 
                 <h1 class="task-management-title">To do List</h1>
-                <form>
-                    <input type="text" class="form-enter-task" placeholder="Enter a new task...">
-                    <select class="form-enter-category">
+                <h2>Thursday | 06.02.25</h2>
+                <form class="task-management-form">
+                    <input type="text" class="form-enter-task" placeholder="Select a new task...">
+
+                    <select class="form-select-category">
                         <option value="">Enter a category...</option>
+                        <option value="new">Add a new category</option>
                     </select>
+                    <input type="text" class="form-enter-category hide" placeholder="Enter a category...">
                     <button type="submit" class="form-add-button">Add</button>
                 </form>
                 <ul class="task-management-category-buttons">
-                    <li class="category-button">All</li>
-                    <li class="category-button">Work</li>
-                    <li class="category-button">Personal</li>
+                    <li class="category-button all">All</li>
+
                 </ul>
             </div>
         </header>
 
         <section>
             <div class="task-tile-wrapper">
-                <div class="task-tile-container">
+                <!-- <div class="task-tile-container">
                     <div class="task-tile-text-container">
                         <div class="task-tile-category">Urgent</div>
                         <div class="task-tile-entered-task">Pay phone bill</div>
@@ -47,7 +50,7 @@
                         </div>
                         <div class="task-tile-remove">x</div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </section>
 

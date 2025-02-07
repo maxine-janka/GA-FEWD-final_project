@@ -2,32 +2,102 @@
 const taskInput = document.querySelector('.form-enter-task')
 const taskAddButton = document.querySelector('.form-add-button')
 const toDoListItems = document.querySelector('.task-tile-wrapper')
+const categoryInput = document.querySelector('.form-enter-category')
+const categorySelect = document.querySelector('.form-select-category')
+const categoryButtons = document.querySelector('.task-management-category-buttons');
 
 //EVENT LISTENERS
 taskAddButton.addEventListener('click', addToDoItem);
 toDoListItems.addEventListener('click', deleteToDoItem);
+categorySelect.addEventListener('change', hideDropDown)
+categoryInput.addEventListener('blur', showDropDown)
 
 //FUNCTIONS
+function hideDropDown(event) {
+    if (categorySelect.value === "new"){
+        categorySelect.classList.add("hide");
+        categoryInput.classList.remove("hide");
+        categoryInput.value = "";
+        categoryInput.focus();
+    }
+};
+function showDropDown(event) {
+    const categoryName = categoryInput.value.trim();
 
-//Add item task
+    if (categoryName === "") {
+        categoryInput.classList.add("hide");
+        categorySelect.classList.remove("hide");
+        categorySelect.value = "";
+    } else {
+        addCategorytoDropDown(categoryName);
+        categoryInput.classList.add("hide");
+        categorySelect.classList.remove("hide");
+        categorySelect.value = "";
+        categoryInput.value = "";
+
+    } 
+};
+function addCategorytoDropDown(categoryName) {
+    const existingCategories = Array.from(categorySelect.options);
+    const categoryExists = existingCategories.some(option => option.value === categoryName);
+
+    if (!categoryExists) {
+        const newCategory = document.createElement("option");
+        newCategory.value = categoryName;
+        newCategory.textContent = categoryName;
+        categorySelect.appendChild(newCategory);
+        
+        categoryInput.value = "";
+        categorySelect.value = "";
+        categoryInput.classList.add("hide");
+        categorySelect.classList.remove("hide");
+
+        addCategoryButton(categoryName);
+    } 
+};
+
+//Add category button
+function addCategoryButton(categoryName) {
+    const existingButtons = Array.from(categoryButtons.children);
+    const categoryButtonExists = existingButtons.some(button => button.innerText === categoryName);
+
+    if (!categoryButtonExists) {
+        const newCategoryButton = document.createElement("li");
+        newCategoryButton.classList.add("category-button");
+        newCategoryButton.innerText = categoryName;
+        categoryButtons.appendChild(newCategoryButton);
+
+        newCategoryButton.addEventListener('click', () => filterTasks(categoryName));
+    }
+}
+
+
+//Add task item function
 function addToDoItem(event){
     event.preventDefault();
 
     if (taskInput.value.trim() === "") {
         return;
     }
+    let selectedCategory = categorySelect.value;
 
+    if (categorySelect.value === "new" && categoryInput.value.trim() !== "") {
+        selectedCategory = categoryInput.value.trim();
+        addCategorytoDropDown(selectedCategory);
+    }
+
+    //Add div task tile container
     const addItemDiv = document.createElement('div');
     addItemDiv.classList.add('task-tile-container');
 
     //Container for task text and category
-    const taskAndCategoryContainer = document.createElement('div')
-    taskAndCategoryContainer.classList.add('task-tile-text-container')
+    const taskAndCategoryContainer = document.createElement('div');
+    taskAndCategoryContainer.classList.add('task-tile-text-container');
     addItemDiv.appendChild(taskAndCategoryContainer);
     
     //Add task category
     const addCatgeory = document.createElement('div');
-    addCatgeory.innerText = 'Urgent';
+    addCatgeory.innerText = selectedCategory || "Uncategorized";
     addCatgeory.classList.add('task-tile-category');
     taskAndCategoryContainer.appendChild(addCatgeory);
     
@@ -59,14 +129,19 @@ function addToDoItem(event){
     
     toDoListItems.appendChild(addItemDiv);
 
-    taskInput.value="";
+    taskInput.value="";  
+    categoryInput.value = "";
+    categorySelect.value = "";
+    categoryInput.classList.add("hide");
+    categorySelect.classList.remove("hide");
 };
 
-//Modal
+//MODAL AND DELETE TASK FUNCTION
+
+//Modal variables
 const deleteModal = document.querySelector('.modal-confirm-delete-task');
 const confirmDeleteButton = document.querySelector('.modal-button.yes');
 const cancelDeleteButton = document.querySelector('.modal-button.no');
-//let taskToDelete = "";
 
 //delete item function
 function deleteToDoItem (event) {
@@ -77,16 +152,14 @@ function deleteToDoItem (event) {
     }
 };
 
-confirmDeleteButton.addEventListener('click', function ()
-{
+confirmDeleteButton.addEventListener('click', function (){
     if (taskToDelete) {
         taskToDelete.remove();   
     }
     deleteModal.style.display = 'none';
 });
 
-cancelDeleteButton.addEventListener('click', function () 
-{
+cancelDeleteButton.addEventListener('click', function () {
     deleteModal.style.display = 'none';
 
 });
@@ -105,3 +178,26 @@ toDoListItems.addEventListener('change', function(event) {
         }
     }
 })
+
+function filterTasks(categoryName){
+
+    let allTasks = document.querySelectorAll('.task-tile-container');
+    
+    allTasks.forEach(task => {
+        let tileCategory = task.querySelector('.task-tile-category');
+     
+    let showAllButton = document.querySelector('.category-button.all');
+    showAllButton.addEventListener('click', function () {
+        task.style.display = "flex";
+    })
+ 
+        if (tileCategory && tileCategory.innerHTML === categoryName) {
+            task.style.display = "flex";
+        } else {
+            task.style.display = "none";
+        }
+    })
+
+}
+
+
