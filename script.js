@@ -197,7 +197,19 @@ function filterTasks(categoryName){
             task.style.display = "none";
         }
     })
-
 }
 
+
+//Get Dates
+const weekday = ["Sunday", "Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+getDate = new Date();
+let day = weekday[getDate.getDay()];
+
+let date = String(getDate.getDate());
+let month = String(getDate.getMonth());
+let year = String(getDate.getFullYear());
+
+let formattedDate = `${day} | ${date}.${month}.${year}`;
+
+document.getElementById('currentDate').innerHTML = formattedDate;
 
