@@ -1,6 +1,5 @@
 * {
-    margin: 0;   
-    /* border: 1px solid black; */
+    margin: 0;
 }
 body {
     font-family: "JetBrains Mono", serif;
@@ -22,6 +21,10 @@ h1.task-management-title {
     text-transform: uppercase;
     font-weight: 800;
 }
+h2.task-management-date {
+    margin-top: 8px;
+    margin-bottom: 24px;
+}
 .form-select-category {
     width: 402px;
     padding: 16px;
@@ -34,7 +37,7 @@ h1.task-management-title {
     box-shadow: 5px 6px 12px #c9c8c8;
 }
 .form-enter-task  {
-    width: 400px;
+    width: 366px;
     padding: 16px;
     border-radius: 16px;
     margin: 16px 0;
@@ -63,7 +66,7 @@ input[type="text"]:focus, .form-select-category:focus {
 }
 .form-add-button {
     padding: 16px 24px;
-    margin: 0 0 24px 0;
+    margin: 0 8px 24px 0;
     border-radius: 16px;
     box-shadow: 4px 4px;
     font-family: "JetBrains Mono", serif;
@@ -71,7 +74,6 @@ input[type="text"]:focus, .form-select-category:focus {
     font-size: 16px;
     font-weight: 600;
     border: 2px solid #000;
-
 }
 .form-add-button:hover {
     cursor: pointer;
@@ -99,8 +101,10 @@ li.category-button
 }
 li.category-button:hover {
     cursor: pointer;
+    background-color: #000;
+    color: #fff;
 }
-div.task-tile-container {
+.task-tile-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -112,28 +116,30 @@ div.task-tile-container {
     border-radius: 8px;
     box-shadow: 4px 4px;
 }
-div.task-tile-text-container {
+.task-tile-text-container {
     width: 100%;
     display: flex;
 }
-div.task-tile-entered-task {
+.task-tile-entered-task {
    font-weight: 800;
-   margin-left: 32px;
+   margin-left: 40px;
+   
 }
-div.task-tile-checkbox-container {
+.task-tile-checkbox-container {
     display: flex;
     gap: 16px; 
     align-items: center;
 }
-div.task-tile-category {
+.task-tile-category {
     padding: 4px 16px;
-    margin-right: 8px;
+    min-width: 60px;
     border-radius: 24px;
     text-transform: uppercase;
     font-size: 12px;
     font-weight: 800;
     background-color: #E47272;
     border: 2px solid black;
+    text-align: center;
 }
 .task-tile-remove, .task-tile-checkbox-done {
     width: 36px;

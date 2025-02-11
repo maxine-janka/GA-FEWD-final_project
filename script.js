@@ -1,4 +1,4 @@
-// SELECTORS
+// GLOBAL VARIABLES
 const taskInput = document.querySelector('.form-enter-task')
 const taskAddButton = document.querySelector('.form-add-button')
 const toDoListItems = document.querySelector('.task-tile-wrapper')
@@ -6,13 +6,18 @@ const categoryInput = document.querySelector('.form-enter-category')
 const categorySelect = document.querySelector('.form-select-category')
 const categoryButtons = document.querySelector('.task-management-category-buttons');
 
-//EVENT LISTENERS
+//Modal Variables
+const deleteModal = document.querySelector('.modal-confirm-delete-task');
+const confirmDeleteButton = document.querySelector('.modal-button.yes');
+const cancelDeleteButton = document.querySelector('.modal-button.no');
+
+//TASK MANAGEMENT EVENT LISTENERS
 taskAddButton.addEventListener('click', addToDoItem);
 toDoListItems.addEventListener('click', deleteToDoItem);
 categorySelect.addEventListener('change', hideDropDown)
 categoryInput.addEventListener('blur', showDropDown)
 
-//FUNCTIONS
+//FUNCs: Category dropdown list
 function hideDropDown(event) {
     if (categorySelect.value === "new"){
         categorySelect.classList.add("hide");
@@ -23,7 +28,6 @@ function hideDropDown(event) {
 };
 function showDropDown(event) {
     const categoryName = categoryInput.value.trim();
-
     if (categoryName === "") {
         categoryInput.classList.add("hide");
         categorySelect.classList.remove("hide");
@@ -34,7 +38,6 @@ function showDropDown(event) {
         categorySelect.classList.remove("hide");
         categorySelect.value = "";
         categoryInput.value = "";
-
     } 
 };
 function addCategorytoDropDown(categoryName) {
@@ -46,41 +49,32 @@ function addCategorytoDropDown(categoryName) {
         newCategory.value = categoryName;
         newCategory.textContent = categoryName;
         categorySelect.appendChild(newCategory);
-        
-        categoryInput.value = "";
-        categorySelect.value = "";
         categoryInput.classList.add("hide");
         categorySelect.classList.remove("hide");
-
         addCategoryButton(categoryName);
     } 
 };
 
-//Add category button
+//FUNC: Add Category filter button
 function addCategoryButton(categoryName) {
     const existingButtons = Array.from(categoryButtons.children);
     const categoryButtonExists = existingButtons.some(button => button.innerText === categoryName);
-
     if (!categoryButtonExists) {
         const newCategoryButton = document.createElement("li");
         newCategoryButton.classList.add("category-button");
         newCategoryButton.innerText = categoryName;
         categoryButtons.appendChild(newCategoryButton);
-
         newCategoryButton.addEventListener('click', () => filterTasks(categoryName));
     }
 }
 
-
-//Add task item function
+//FUNC: Add user input task to list
 function addToDoItem(event){
     event.preventDefault();
-
     if (taskInput.value.trim() === "") {
         return;
     }
     let selectedCategory = categorySelect.value;
-
     if (categorySelect.value === "new" && categoryInput.value.trim() !== "") {
         selectedCategory = categoryInput.value.trim();
         addCategorytoDropDown(selectedCategory);
@@ -90,7 +84,7 @@ function addToDoItem(event){
     const addItemDiv = document.createElement('div');
     addItemDiv.classList.add('task-tile-container');
 
-    //Container for task text and category
+    //Add container for task text and category
     const taskAndCategoryContainer = document.createElement('div');
     taskAndCategoryContainer.classList.add('task-tile-text-container');
     addItemDiv.appendChild(taskAndCategoryContainer);
@@ -128,42 +122,28 @@ function addToDoItem(event){
     deleteItemButton.addEventListener('click', deleteToDoItem);
     
     toDoListItems.appendChild(addItemDiv);
-
-    taskInput.value="";  
-    categoryInput.value = "";
-    categorySelect.value = "";
-    categoryInput.classList.add("hide");
-    categorySelect.classList.remove("hide");
-};
-
-//MODAL AND DELETE TASK FUNCTION
-
-//Modal variables
-const deleteModal = document.querySelector('.modal-confirm-delete-task');
-const confirmDeleteButton = document.querySelector('.modal-button.yes');
-const cancelDeleteButton = document.querySelector('.modal-button.no');
-
-//delete item function
-function deleteToDoItem (event) {
-    const deleteButton = event.target;
-    if (deleteButton.classList.contains('task-tile-remove')) {
-        taskToDelete = deleteButton.closest('.task-tile-container');
-        deleteModal.style.display = 'flex';
+    taskInput.value="";
+    storeToDos();  
     }
-};
 
-confirmDeleteButton.addEventListener('click', function (){
-    if (taskToDelete) {
-        taskToDelete.remove();   
-    }
-    deleteModal.style.display = 'none';
-});
+//FUNC: Filter to do items in list
+function filterTasks(categoryName){
+    let allTasks = document.querySelectorAll('.task-tile-container');
+    allTasks.forEach(task => {
+        let tileCategory = task.querySelector('.task-tile-category');
+    let showAllButton = document.querySelector('.category-button.all');
+    showAllButton.addEventListener('click', function () {
+        task.style.display = "flex";
+    })
+        if (tileCategory && tileCategory.innerHTML === categoryName) {
+            task.style.display = "flex";
+        } else {
+            task.style.display = "none";
+        }
+    })
+}
 
-cancelDeleteButton.addEventListener('click', function () {
-    deleteModal.style.display = 'none';
-
-});
-
+//Check item as done - toggle
 toDoListItems.addEventListener('change', function(event) {
     if (event.target.type === 'checkbox') {
         const taskContainer = event.target.closest('.task-tile-container');
@@ -179,37 +159,48 @@ toDoListItems.addEventListener('change', function(event) {
     }
 })
 
-function filterTasks(categoryName){
+//FUNC: Pop up modal to delete task
+function deleteToDoItem (event) {
+    const deleteButton = event.target;
+    if (deleteButton.classList.contains('task-tile-remove')) {
+        taskToDelete = deleteButton.closest('.task-tile-container');
+        deleteModal.style.display = 'flex';
+    }
+};
+confirmDeleteButton.addEventListener('click', function (){
+    if (taskToDelete) {
+        taskToDelete.remove();   
+    }
+    deleteModal.style.display = 'none';
+});
+cancelDeleteButton.addEventListener('click', function () {
+    deleteModal.style.display = 'none';
+});
 
-    let allTasks = document.querySelectorAll('.task-tile-container');
-    
-    allTasks.forEach(task => {
-        let tileCategory = task.querySelector('.task-tile-category');
-     
-    let showAllButton = document.querySelector('.category-button.all');
-    showAllButton.addEventListener('click', function () {
-        task.style.display = "flex";
-    })
- 
-        if (tileCategory && tileCategory.innerHTML === categoryName) {
-            task.style.display = "flex";
-        } else {
-            task.style.display = "none";
-        }
-    })
-}
-
-
-//Get Dates
+//H2 get current day & date
 const weekday = ["Sunday", "Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 getDate = new Date();
 let day = weekday[getDate.getDay()];
-
 let date = String(getDate.getDate()).padStart(2, '0');
 let month = String(getDate.getMonth() + 1).padStart(2, '0');
 let year = String(getDate.getFullYear());
-
 let formattedDate = `${day} | ${date}.${month}.${year}`;
-
 document.getElementById('currentDate').innerHTML = formattedDate;
 
+function storeToDos() {
+    savedArr = []
+    document.querySelectorAll(".task-tile-container").forEach(task => {
+        savedArr.push(task.innerText);
+        console.log(savedArr);
+    });
+    localStorage.setItem("storedToDos", JSON.stringify(savedArr));
+}
+document.addEventListener("DOMContentLoaded", loadToDos);
+function loadToDos() {
+    let itemsToLoad = JSON.parse(localStorage.getItem("storeToDos"))
+    itemsToLoad.forEach(taskInnerText => {
+        const newDiv = document.createElement("div");
+        newDiv.classList.add(".task-tile-container");
+        newDiv.innerText = taskInnerText;
+    })
+}

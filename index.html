@@ -2,71 +2,53 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>✏️ To do List</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
-        rel="stylesheet">
-
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>✏️ To do List</title>
+	<link rel="stylesheet" href="styles.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
+		rel="stylesheet">
 </head>
 
 <body>
-    <main>
-        <header>
-            <div class="task-management-container">
+	<main>
+		<header>
+			<div class="task-management-container">
+				<h1 class="task-management-title">To do List</h1>
+				<h2 class="task-management-date" id="currentDate"></h2>
+				<form class="task-management-form">
+					<input type="text" class="form-enter-task" placeholder="Enter a new task...">
+					<select class="form-select-category" placeholder="Add a category">
+						<option value="">Add a category...</option>
+						<option value="new">Add a new category</option>
+					</select>
+					<input type="text" class="form-enter-category hide" placeholder="Enter a category...">
+					<button type="submit" class="form-add-button">Add</button>
+				</form>
+				<ul class="task-management-category-buttons">
+					<li class="category-button all">All</li>
+				</ul>
+			</div>
+		</header>
 
-                <h1 class="task-management-title">To do List</h1>
-                <h2 id="currentDate"></h2>
-                <form class="task-management-form">
-                    <input type="text" class="form-enter-task" placeholder="Select a new task...">
+		<section>
+			<div class="task-tile-wrapper"></div>
+		</section>
 
-                    <select class="form-select-category">
-                        <option value="">Enter a category...</option>
-                        <option value="new">Add a new category</option>
-                    </select>
-                    <input type="text" class="form-enter-category hide" placeholder="Enter a category...">
-                    <button type="submit" class="form-add-button">Add</button>
-                </form>
-                <ul class="task-management-category-buttons">
-                    <li class="category-button all">All</li>
-
-                </ul>
-            </div>
-        </header>
-
-        <section>
-            <div class="task-tile-wrapper">
-                <!-- <div class="task-tile-container">
-                    <div class="task-tile-text-container">
-                        <div class="task-tile-category">Urgent</div>
-                        <div class="task-tile-entered-task">Pay phone bill</div>
-                    </div>
-                    <div class="task-tile-checkbox-container">
-                        <div class="task-tile-checkbox-done">
-                            <input type="checkbox">
-                        </div>
-                        <div class="task-tile-remove">x</div>
-                    </div>
-                </div> -->
-            </div>
-        </section>
-
-        <!--Pop up Modal-->
-        <aside class="modal-confirm-delete-task">
-            <div class="modal-delete-message">
-                <p>Are you sure you want to delete this task?</p>
-                <div class="modal-button-container">
-                    <div class="modal-button yes">Yes</div>
-                    <div class="modal-button no">No</div>
-                </div>
-            </div>
-        </aside>
-
-    </main>
-    <script src="script.js"></script>
+		<!--Pop up Modal-->
+		<aside class="modal-confirm-delete-task">
+			<div class="modal-delete-message">
+				<p>Are you sure you want to delete this task?</p>
+				<div class="modal-button-container">
+					<div class="modal-button yes">Yes</div>
+					<div class="modal-button no">No</div>
+				</div>
+			</div>
+		</aside>
+	</main>
+	<script src="script.js"></script>
 </body>
 
 </html>
